@@ -40,3 +40,23 @@ while opcao != 9:
             print("listagem concluída")
 
             encerrarBancoDados(conexao)
+ elif opcao ==2:
+        tip = input(
+            "Digite o número da categoria de manifestação que voce quer listar: 1- reclamação 2-sugestão ou 3- elogio")
+
+        conexao = abrirBancoDados('localhost', 'root', '12345', 'ouvidoria')
+
+        sqlListar = 'select * from MANIFESTACAO where Tipo = ' + tip
+
+        listamanifestacao = listarBancoDados(conexao, sqlListar)
+
+        if len(listamanifestacao) == 0:
+            print('Nao tem ocorrencias')
+        else:
+            for item in listamanifestacao:
+                print('código ', item[0], '-', item[1],
+                      '-', item[4])
+
+            print("listagem de categoria concluída")
+
+        encerrarBancoDados(conexao)
